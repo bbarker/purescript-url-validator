@@ -1,0 +1,11 @@
+/.*
+!/.gitignore
+!/.eslintrc.json
+!/.travis.yml
+package-lock.json
+/bower_components/
+/node_modules/
+/output/
+.\#*
+/dist/
+*~
