@@ -1,19 +1,14 @@
-# purescript-web-xpath
-
-[![Latest release](http://img.shields.io/github/release/purescript-web/purescript-web-dom-xpath.svg)](https://github.com/purescript-web/purescript-web-dom-xpath/releases)
-[![Build status](https://travis-ci.org/purescript-web/purescript-web-dom-xpath.svg?branch=master)](https://travis-ci.org/purescript-web/purescript-web-dom-xpath)
-
-Type definitions and low level interface implementations for the [W3C DOM XPath API](https://www.w3.org/TR/DOM-Level-3-XPath/).
+# purescript-uri-validator
 
 ## Installation
 
 ```
-bower install purescript-web-dom-xpath
+bower install purescript-uri-validator
 ```
 
 ## Documentation
 
-Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-web-dom-xpath).
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-uri-validator).
 
 ## Tests
 

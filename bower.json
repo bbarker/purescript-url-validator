@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bbarker/purescript-uri-validator.git",
+    "url": "git://github.com/bbarker/purescript-uri-validator.git"
   },
   "ignore": [
     "**/.*",
@@ -14,8 +14,6 @@
     "bower.json",
     "package.json"
   ],
-  "dependencies": {
-  },
   "devDependencies": {
     "purescript-test-unit": "^15.0.0",
     "purescript-console": "^4.2.0",
