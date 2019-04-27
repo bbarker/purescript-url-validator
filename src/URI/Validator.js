@@ -1,106 +1,42 @@
 "use strict";
 
-exports.evaluateInternal = function (xpathExpression) {
-  return function (contextNode) {
-    return function (namespaceResolver) {
-      return function (resultType) {
-        return function (result) {
-          return function (doc) {
-            return function () { // Effect thunk
-              return doc.evaluate(
-                xpathExpression
-                , contextNode
-                , namespaceResolver
-                , resultType
-                , result
-              );
-            };
-          };
-        };
+// Returns an error string if there is an error, otherwise,
+// returns null
+exports.validateUrl = function(credsCheck) {
+  return function (url) {
+    if (!url || !/^https?:\/\//.test(url)) {
+      return "Unknown or missing protocol format";
+    };
+
+    const parser = document.createElement('a');
+    parser.href = url;
+
+    // Reject URLs with username or password
+    if (credsCheck) {
+      if (parser.username) {
+        return "URL contains a username"
+      };
+      if (parser.password) {
+        return "URL contains a password"
       };
     };
-  };
-};
 
-
-//       --- XPathResult functions ---
-
-exports.resultType = function (xpathResult) {
-  return xpathResult.resultType;
-};
-
-exports.numberValue = function (xpathResult) {
-  return function () { // Effect thunk
-    return xpathResult.numberValue;
-  };
-};
-
-exports.stringValue = function (xpathResult) {
-  return function () { // Effect thunk
-    return xpathResult.stringValue;
-  };
-};
-
-exports.booleanValue = function (xpathResult) {
-  return function () { // Effect thunk
-    return xpathResult.booleanValue;
-  };
-};
-
-exports.singleNodeValueInternal = function (xpathResult) {
-  return function () { // Effect thunk
-    return xpathResult.singleNodeValue;
-  };
-};
-
-exports.invalidIteratorState = function (xpathResult) {
-  return xpathResult.invalidIteratorState;
-};
-
-exports.snapshotLengthInternal = function (xpathResult) {
-  return function () { // Effect thunk
-    return xpathResult.snapshotLength;
-  };
-};
-
-exports.iterateNextInternal = function (xpathResult) {
-  return function () { // Effect thunk
-    return xpathResult.iterateNext();
-  };
-};
-
-exports.snapshotItemInternal = function (xpathResult) {
-  return function (index) {
-    return function () { // Effect thunk
-      return xpathResult.snapshotItem(index);
+    // Require a dot then something other than
+    // numbers and dots in the hostname
+    if (!/\.[^0-9.]/.test(parser.hostname)) {
+      return "Invalid hostname"
     };
+
+    // Disallow whitespace, starting with a dot
+    // or ending with a dot in the hostname
+    if (/(\s|^\.|\.$)/.test(parser.hostname)) {
+      return "Hostname contains whitespace"
+    };
+
+    if (parser.href !== url) {
+      return "Uknown error: supplied url ${url} doesn't match parsed href ${parser.href}"
+    };
+    return null;
   };
 };
-
-//       --- namespace resolver functions ---
-
-exports.customNSResolver = function (customRes) {
-  var nsResolver = {
-    lookupNamespaceURI : customRes
-  };
-  return nsResolver;
-};
-
-exports.createNSResolver = function (nodeResolver) {
-  return function (doc) {
-    return doc.createNSResolver(nodeResolver);
-  };
-};
-
-exports.lookupNamespaceURIInternal = function (nsResolver) {
-  return function (prefix) {
-    return nsResolver.lookupNamespaceURI(prefix);
-  };
-};
-
-// exports._makeEmptyDoc = function () {  // Effect thunk
-//     var doc = (new DOMParser()).parseFromString('<dummy/>', 'application/xml');
-//     doc.removeChild(doc.documentElement);
-//     return doc;
-// };
 
