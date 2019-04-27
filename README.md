@@ -1,14 +1,23 @@
-# purescript-uri-validator
+# purescript-url-validator
+
+## About
+
+This is a fairly minimal URL parser. It relies on JavaScript APIs provided by
+the browser (`DOM` and `RegExp`), and has no external JavaScript or `PureScript`
+depenenciens, other than `PureScript` prelude.
+
+It has not been extensively tested, and likely is not perfect, so if you do
+notice any issues.
 
 ## Installation
 
 ```
-bower install purescript-uri-validator
+bower install purescript-url-validator
 ```
 
 ## Documentation
 
-Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-uri-validator).
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-url-validator).
 
 ## Tests
 
