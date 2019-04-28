@@ -2,29 +2,22 @@ module Test.Main where
 
 import Prelude
 
-import Data.Array                        ((!!), length)
-import Data.Int                          (toNumber)
-import Data.Maybe                        (Maybe(..), fromJust, fromMaybe)
-import Data.Natural                      (intToNat)
--- import Debug.Trace                       (traceM)
+import Data.Either                       (isRight)
 import Effect                            (Effect)
-import Effect.Aff                        (Aff)
-import Effect.Class                      (liftEffect)
-import Effect.Console                    (logShow)
-import Foreign                           (isUndefined, isNull, unsafeToForeign)
-import Partial.Unsafe                    (unsafePartial)
-import Test.Data                         as TD
-import Test.Unit                         (suite, test)
+import Test.Unit                         (TestSuite, suite, test)
 import Test.Unit.Main                    (runTest)
 import Test.Unit.Assert                  as Assert
+import URL.Validator
 
-
+url1 :: String
 url1 = "https://www.example.com:80/page?q=foobar#section"
 
 main :: Effect Unit
 main = runTest do
-  suite "non-namespaced tests" do
-    test "note.xml and catalog.xml" do
+  suite "Public URLs that should validate" do
+    publicUrlTestPositive url1
 
-tlog :: forall a. Show a => a -> Aff Unit
-tlog = liftEffect <<< logShow
+publicUrlTestPositive :: String -> TestSuite
+publicUrlTestPositive url = test url do
+  Assert.assert (url <> " should validate") $ validatePublicURL url
+  Assert.assert (url <> " should return Right") $ isRight $ parsePublicURL url

@@ -18,9 +18,6 @@
     "purescript-nullable": "^4.1.1"
   },
   "devDependencies": {
-    "purescript-test-unit": "^15.0.0",
-    "purescript-console": "^4.2.0",
-    "purescript-debug": "^4.0.0",
-    "purescript-foreign": "^5.0.0"
+    "purescript-test-unit": "^15.0.0"
   }
 }
