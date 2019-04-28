@@ -23,7 +23,7 @@ Module documentation is [published on Pursuit](http://pursuit.purescript.org/pac
 
 ### Run tests in a browser
 
-Do `npm run testbrowser` then open up `test/index.html` with your browser's web
+Do `npm run testbrowser` then open up `dist/index.html` with your browser's web
 console open.
 
 ### Headless testing
