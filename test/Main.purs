@@ -3,34 +3,35 @@ module Test.Main where
 import Prelude
 
 import Data.Either                       (isLeft, isRight)
+import Data.Foldable                     (for_)
 import Effect                            (Effect)
 import Test.Unit                         (TestSuite, suite, test)
 import Test.Unit.Main                    (runTest)
 import Test.Unit.Assert                  as Assert
 import URL.Validator
 
-goodUrl1 :: String
-goodUrl1 = "https://www.example.com:80/page?q=foobar#section"
-goodUrl2 :: String
-goodUrl2 = "https://www.example.com:80/pa+ge?q=foobar#section"
-goodUrl3 :: String
-goodUrl3 = "https://www.example.com:80/pa%20ge?q=foobar#section"
+-- type FreeTestF = Compose TestSuite
 
-badUrl1 :: String
-badUrl1 = "httqs://www.example.com:80/page?q=foobar#section"
-badUrl2 :: String
-badUrl2 = "https://www.exa mple.com:80/page?q=foobar#section"
+goodUrls :: Array String
+goodUrls = [
+    "https://www.example.com:80/page?q=foobar#section"
+  , "https://www.example.com:80/pa+ge?q=foobar#section"
+  , "https://www.example.com:80/pa%20ge?q=foobar#section"
+]
+
+badUrls :: Array String
+badUrls = [
+    "httqs://www.example.com:80/page?q=foobar#section"
+  , "https://www.exa mple.com:80/page?q=foobar#section"
+]
 
 main :: Effect Unit
 main = runTest do
   suite "Public URLs that should validate" do
-    publicUrlTestPositive goodUrl1
-    publicUrlTestPositive goodUrl2
-    publicUrlTestPositive goodUrl3
+    for_ goodUrls publicUrlTestPositive
 
   suite "Public URLs that should NOT validate" do
-    publicUrlTestNegative badUrl1
-    publicUrlTestNegative badUrl2
+    for_ badUrls publicUrlTestNegative
 
 publicUrlTestPositive :: String -> TestSuite
 publicUrlTestPositive url = test url do

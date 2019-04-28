@@ -7,7 +7,8 @@ the browser (`DOM` and `RegExp`), and has no external JavaScript or `PureScript`
 depenenciens, other than `PureScript` prelude.
 
 It has not been extensively tested, and likely is not perfect, so if you do
-notice any issues.
+notice any issues. There are some existing unit tests for URLs, which can
+be easily extended by adding your own URLs.
 
 ## Installation
 
