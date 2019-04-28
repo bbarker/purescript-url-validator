@@ -27,10 +27,10 @@ badUrls = [
 
 main :: Effect Unit
 main = runTest do
-  suite "Public URLs that should validate" do
+  suite "Public URLs that should validate" $
     for_ goodUrls publicUrlTestPositive
 
-  suite "Public URLs that should NOT validate" do
+  suite "Public URLs that should NOT validate" $
     for_ badUrls publicUrlTestNegative
 
 publicUrlTestPositive :: String -> TestSuite
