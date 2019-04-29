@@ -9,7 +9,7 @@
 exports._validateURL = function(credsCheck) {
   return function (url) {
     if (!url || !/^https?:\/\//.test(url)) {
-      return "Unknown or missing protocol format";
+      return "Unknown or missing protocol format in url: " + url;
     }
 
     var parser = document.createElement("a");
@@ -18,23 +18,24 @@ exports._validateURL = function(credsCheck) {
     // Reject URLs with username or password
     if (credsCheck) {
       if (parser.username) {
-        return "URL contains a username";
+        return "URL " + url + " contains a username: " + parser.username;
       }
       if (parser.password) {
-        return "URL contains a password";
+        return "URL " + url + " contains a password: " + parser.password;
       }
     }
 
     // Require a dot then something other than
     // numbers and dots in the hostname
     if (!/\.[^0-9.]/.test(parser.hostname)) {
-      return "Invalid hostname";
+      return "Invalid hostname '" + parser.href + "' in " + url;
     }
 
     // Disallow whitespace, starting with a dot
     // or ending with a dot in the hostname
     if (/(\s|^\.|\.$)/.test(parser.hostname)) {
-      return "Hostname contains whitespace";
+      return "Hostname '" + parser.href +
+        "' contains whitespace in " + url;
     }
 
     if (parser.href.toLowerCase() !== url.toLowerCase()) {
