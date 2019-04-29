@@ -37,7 +37,7 @@ exports._validateURL = function(credsCheck) {
       return "Hostname contains whitespace";
     }
 
-    if (parser.href !== url) {
+    if (parser.href.toLowerCase() !== url.toLowerCase()) {
       return "Uknown error: supplied URL " + url + " doesn't " +
         "match parsed href " + parser.href;
     }
