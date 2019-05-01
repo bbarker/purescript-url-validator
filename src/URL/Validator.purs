@@ -7,9 +7,14 @@ module URL.Validator (
   , validatePublicURL
 ) where
 
+import Prelude
+
 import Data.Either          (Either(..))
 
 newtype URL = URL String
+derive instance eqURL :: Eq URL
+instance showURL :: Show URL where
+  show (URL ustr) = show ustr
 
 foreign import _validateURL :: Boolean -> String -> String
 
