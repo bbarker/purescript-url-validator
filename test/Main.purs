@@ -37,6 +37,9 @@ badUrls :: Array String
 badUrls = [
     "httqs://www.example.com:80/page?q=foobar#section"
   , "https://www.exa mple.com:80/page?q=foobar#section"
+  , ""
+  , "http://"
+  , "https://"
 ]
 
 main :: Effect Unit
