@@ -30,6 +30,7 @@ goodUrls = [
   , "https://www.example.com:80/pa%20ge?q=foobar#section"
   , "https://www.exa%20mple.com:80/page?q=foobar#section"
   , "http://HgMuxvbx.au/"
+  , "http://foo.com"
 ]
 
 badUrls :: Array String

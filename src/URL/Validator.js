@@ -38,8 +38,9 @@ exports._validateURL = function(credsCheck) {
         "' contains whitespace in " + url;
     }
 
-    if (parser.href.toLowerCase() !== url.toLowerCase()) {
-      return "Uknown error: supplied URL " + url + " doesn't " +
+    if (parser.href.toLowerCase().replace(/\/+$/g,"") !==
+        url.toLowerCase().replace(/\/+$/g,"")) {
+      return "Unkown error: supplied URL " + url + " doesn't " +
         "match parsed href " + parser.href;
     }
     return "SUCCESS";
