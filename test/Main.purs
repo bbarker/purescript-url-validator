@@ -3,15 +3,13 @@ module Test.Main where
 import Prelude
 
 import Data.Array                        (concat)
-import Data.Either                       (isLeft, isRight)
+import Data.Either                       (Either(..), isLeft, isRight, fromLeft, fromRight)
 import Data.Foldable                     (for_)
 import Effect                            (Effect)
 import Test.Unit                         (TestSuite, suite, test)
 import Test.Unit.Main                    (runTest)
 import Test.Unit.Assert                  as Assert
 import URL.Validator
-
--- type FreeTestF = Compose TestSuite
 
 goodPrivateUrls :: Array String
 goodPrivateUrls = [
@@ -59,7 +57,11 @@ main = runTest do
 publicUrlTestPositive :: String -> TestSuite
 publicUrlTestPositive url = test url do
   Assert.assert (url <> " should validate") $ validatePublicURL url
-  Assert.assert (url <> " should return Right") $ isRight $ parsePublicURL url
+  let pRes = parsePublicURL url
+  err <- pure $ case pRes of
+    Left e -> e
+    Right _ -> ""
+  Assert.assert (url <> " should return Right, but: " <> err) $ isRight $ pRes
 
 publicUrlTestNegative :: String -> TestSuite
 publicUrlTestNegative url = test url do
@@ -69,7 +71,12 @@ publicUrlTestNegative url = test url do
 anyUrlTestPositive :: String -> TestSuite
 anyUrlTestPositive url = test url do
   Assert.assert (url <> " should validate") $ validateURL url
-  Assert.assert (url <> " should return Right") $ isRight $ parseURL url
+  let pRes = parseURL url
+  err <- pure $ case pRes of
+    Left e -> e
+    Right _ -> ""
+  Assert.assert (url <> " should return Right, but: " <> err) $ isRight $ pRes
+
 
 anyUrlTestNegative :: String -> TestSuite
 anyUrlTestNegative url = test url do
