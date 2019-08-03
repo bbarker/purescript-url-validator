@@ -2,6 +2,7 @@ module Text.URL.Validate (
     URL
   , parseURL
   , parsePublicURL
+  , urlToNEString
   , urlToString
   , validateURL
   , validatePublicURL
