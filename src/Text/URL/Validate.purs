@@ -1,4 +1,4 @@
-module URL.Validator (
+module Text.URL.Validate (
     URL
   , parseURL
   , parsePublicURL

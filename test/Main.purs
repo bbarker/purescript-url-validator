@@ -9,7 +9,7 @@ import Effect                            (Effect)
 import Test.Unit                         (TestSuite, suite, test)
 import Test.Unit.Main                    (runTest)
 import Test.Unit.Assert                  as Assert
-import URL.Validator                     (parsePublicURL, parseURL
+import Text.URL.Validate                 (parsePublicURL, parseURL
                                          , validatePublicURL, validateURL)
 
 
