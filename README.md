@@ -4,11 +4,11 @@
 
 This is a fairly minimal URL parser. It relies on JavaScript APIs provided by
 the browser (`DOM` and `RegExp`), and has no external JavaScript or `PureScript`
-depenenciens, other than `PureScript` prelude.
+dependencies, other than `PureScript` prelude.
 
-It has not been extensively tested, and likely is not perfect, so if you do
-notice any issues. There are some existing unit tests for URLs, which can
-be easily extended by adding your own URLs.
+It has not been extensively tested, and likely is not perfect, so if you notice
+any issues, please report them. There are some existing unit tests for URLs,
+which can be easily extended by adding your own URLs.
 
 ## Installation
 
