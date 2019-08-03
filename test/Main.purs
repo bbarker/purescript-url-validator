@@ -3,13 +3,15 @@ module Test.Main where
 import Prelude
 
 import Data.Array                        (concat)
-import Data.Either                       (Either(..), isLeft, isRight, fromLeft, fromRight)
+import Data.Either                       (Either(..), isLeft, isRight)
 import Data.Foldable                     (for_)
 import Effect                            (Effect)
 import Test.Unit                         (TestSuite, suite, test)
 import Test.Unit.Main                    (runTest)
 import Test.Unit.Assert                  as Assert
-import URL.Validator
+import URL.Validator                     (parsePublicURL, parseURL
+                                         , validatePublicURL, validateURL)
+
 
 goodPrivateUrls :: Array String
 goodPrivateUrls = [

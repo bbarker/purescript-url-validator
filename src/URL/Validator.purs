@@ -9,9 +9,11 @@ module URL.Validator (
 
 import Prelude
 
-import Data.Either          (Either(..))
+import Data.Either                       (Either(..))
+import Data.Maybe                        (Maybe(..))
+import Data.String.NonEmpty              (NonEmptyString, fromString, toString)
 
-newtype URL = URL String
+newtype URL = URL NonEmptyString
 derive instance eqURL :: Eq URL
 instance showURL :: Show URL where
   show (URL ustr) = show ustr
@@ -48,8 +50,13 @@ parsePublicURL urlIn = _statusToURL urlIn hrefStatus
 
 _statusToURL :: String -> String -> Either String URL
 _statusToURL urlIn status = case _checkHrefStatus status of
-  true -> Right (URL urlIn)
+  true -> case fromString urlIn of
+    Just nes -> Right (URL nes)
+    Nothing -> Left "Empty URL"
   false -> Left status
 
 urlToString :: URL -> String
-urlToString (URL str) = str
+urlToString (URL str) = toString str
+
+urlToNEString ::  URL -> NonEmptyString
+urlToNEString (URL str) = str
