@@ -1,12 +1,10 @@
-"use strict";
-
 // Adapted from Hugh Grigg's code found at
 // https://www.hughgrigg.com/posts/validating-urls-with-the-dom/
 // In absence of a URI for the author: https://github.com/hughgrigg
 
 // Returns an error string if there is an error, otherwise,
 // returns "SUCCESS"
-exports._validateURL = function(credsCheck) {
+export function _validateURL(credsCheck) {
   return function (url) {
     if (!url || !/^https?:\/\//.test(url)) {
       return "Unknown or missing protocol format in url: " + url;
@@ -45,5 +43,5 @@ exports._validateURL = function(credsCheck) {
     }
     return "SUCCESS";
   };
-};
+}
 
