@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 
-pulp build --main "Test.Main" --src-path "src" -I "test" \
-     -- --censor-lib && \
+spago -x test.dhall build && \
 parcel build --public-url ./ test/index.html

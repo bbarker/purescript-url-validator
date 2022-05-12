@@ -2,9 +2,9 @@
   "author": "Brandon Barker <brandon.barker@gmail.com> (https://github.com/bbarker)",
   "private": true,
   "scripts": {
-    "clean": "rimraf output && rimraf .pulp-cache",
-    "build": "bower install && eslint src && pulp build",
-    "test": "npm run build && pulp test",
+    "clean": "rimraf output",
+    "build": "eslint src && spago build",
+    "test": "spago test",
     "testbrowser": "./scripts/testbrowser"
   },
   "devDependencies": {
