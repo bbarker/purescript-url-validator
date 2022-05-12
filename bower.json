@@ -15,9 +15,9 @@
     "package.json"
   ],
   "dependencies" : {
-    "purescript-nullable": "^4.1.1"
+    "purescript-nullable": "v6.0.0"
   },
   "devDependencies": {
-    "purescript-test-unit": "^15.0.0"
+    "purescript-test-unit": "v17.0.0"
   }
 }
